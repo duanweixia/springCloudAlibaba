@@ -1,0 +1,14 @@
+server:
+  port: 8005
+
+spring:
+  application:
+    name: provider-payment
+
+  #consul注册中心地址 启动方式 consul agent -dev
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}

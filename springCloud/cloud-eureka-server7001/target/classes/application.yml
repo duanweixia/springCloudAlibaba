@@ -1,0 +1,25 @@
+server:
+  port: 7001
+
+eureka:
+  instance:
+    hostname: eureka7001.com #eureka服务端实例名称
+  client:
+    register-with-eureka: false  #false表示不向注册中心注册自己
+    fetch-registry: false #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    service-url: #设置与eureka server交互的地址查询服务和注册服务都需要依赖这个地址
+      #defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/   单机版配置
+      #集群版 集群的原理：互相注册，相互守望
+      #配置集群时，需要修改 服务器（MAC电脑跟Linux系统一样）/etc/hosts 文件夹，配置域名映射
+      #比如：本机器配置的是：127.0.0.1  eureka7001.com
+      #                 127.0.0.1  eureka7002.com
+      #                 127.0.0.1  eureka7003.com
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+      #eureka自我保护机制，默认是开启的，使用的是CAP理论中的AP，即保证高可用和分区容错性，也就是说不会因为
+      #分区的网络故障，及时的清除掉eureka服务上没有获取到的微服务信息，默认是90秒，90秒以内如果该微服务信息能
+      #连接通，则该微服务信息会一直在eureka服务上面。
+    #我们这里可以手动关闭eureka的这种自我保护机制
+  server:
+    #关闭eureka自我保护机制，保证不可服务被及时清除
+    #enable-self-preservation: false      #默认为true,开启自我保护
+    #eviction-interval-timer-in-ms: 2000  #设置时间为2秒，超过2秒没获取到微服务信息则清除该微服务

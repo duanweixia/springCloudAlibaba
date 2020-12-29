@@ -1,0 +1,10 @@
+server:
+  port: 8004
+
+#服务别名---注册zookeeper到注册中心名称
+spring:
+  application:
+    name: provider-payment
+  cloud:
+    zookeeper:
+      connect-string: 127.0.0.1:2181  #如果zookeeper是集群版，在服务提供者和消费者路径后面依次加上即可，用,隔开即可
