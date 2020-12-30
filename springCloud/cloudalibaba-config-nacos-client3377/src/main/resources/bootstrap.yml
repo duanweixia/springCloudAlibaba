@@ -1,0 +1,25 @@
+# nacos配置
+server:
+  port: 3377
+
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #Nacos服务注册中心地址
+      config:
+        server-addr: localhost:8848 #Nacos作为配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEV_GROUP
+        namespace: a7e2543f-9929-42b1-baf9-0ed93b3c36b1
+# 通过以下公式，把配置文件通过nacos页面配置
+# ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+# 通过上面的公式得到 ：nacos-config-client-dev.yaml  这个值即是nacos页面配置中的 Data ID
+
+# nacos-config-client-test.yaml   ----> config.info
+# nacos默认的命名空间是public,Namespace主要是用来隔离。比如说我们有三个环境：开发、测试、生产环境，我们就可以
+# 创建三个 namespace,不同的 namespace是隔离的。
+# 范围 namespace（方案）> Group （方案） > Data Id（方案）   可以使用这三种方案加载配置
+# 最外层的 namespace 是可以用于区分部署环境的，Data Id 和 Group 逻辑上区分二个目标对象
