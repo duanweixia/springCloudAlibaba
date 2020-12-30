@@ -24,7 +24,9 @@
       <module>cloud-consumer-feign-hystrix-order6005</module>
       <module>cloud-consumer-hystrix-dashboard6006</module>
     <module>cloud-gateway-gateway9527</module>
-    <module>cloud-config-center1001</module>
+    <module>cloud-config-center3344</module>
+    <module>cloud-config-client3355</module>
+    <module>cloud-config-client3366</module>
   </modules>
   <packaging>pom</packaging>
   <!--统一管理jar包和版本-->

@@ -1,0 +1,27 @@
+# application.yml 是用户级的资源配置项，bootstrap.yml是系统级的，优先级更高。client模块下的
+#application.yml 改成 bootstrap.yml 是很关键的
+server:
+  port: 3355
+
+spring:
+  application:
+    name: config-client
+  cloud:
+    #config 客户端配置
+    config:
+      label: master #分支名称
+      name: config  #配置文件名称 - 自动配置
+      profile: dev  #读取后缀名称 上述3个综合：master分支上config-dev.yml的配置文件被读取：http://localhost:3344/master/config-dev.yml
+      uri: http://localhost:3344 #配置中心地址
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+#暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
