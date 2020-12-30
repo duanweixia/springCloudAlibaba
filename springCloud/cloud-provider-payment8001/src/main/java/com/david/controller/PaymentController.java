@@ -77,4 +77,11 @@ public class PaymentController {
         }
         return port;
     }
+
+    //sleuth+zipkin链路监控
+    @GetMapping("/payment/zipkin")
+    public String paymentZipkin(){
+
+        return "嗨，我是paymentZipkin 服务 fall back,欢迎";
+    }
 }

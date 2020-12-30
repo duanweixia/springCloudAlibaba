@@ -16,8 +16,31 @@ spring:
       #读取到的结果：config:
             #       info: master branch,springcloud-config/config-dev.yml version=7
       label: master
+#rabbitmq相关配置
+rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
 
 eureka:
   client:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+
+
+#rabbitmq相关配置,暴露bus刷新配置的端点
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
+
+  #//通过消息总线bus,当在github上改了配置文件，运维只需要执行：
+  #// curl -X POST "http://localhost:3344/actuator/bus-refresh"
+  #//就可以在其他3355和3366服务上获得同步刷新的配置文件，达到了一次修改，广播通知各处的作用
+  # 公式：http://localhost:配置中心端口号/actuator/bus-refresh
+  # curl -X POST "http://localhost:3344/actuator/bus-refresh/{destination}" 执行这个表示定点通知
+  # 比如我们只想通知 3355 则发送：curl -X POST "http://localhost:3344/actuator/bus-refresh/config-client:3355"

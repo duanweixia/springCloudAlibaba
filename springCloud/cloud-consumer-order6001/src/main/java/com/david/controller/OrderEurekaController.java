@@ -75,4 +75,10 @@ public class OrderEurekaController {
 
         return restTemplate.getForObject(uri+"/payment/lb",String.class);
     }
+
+    //sleuth+zipkin链路监控
+    @GetMapping("/order/zipkin")
+    public String orderZipkin(){
+        return restTemplate.getForObject(PAYMENT_URL+"/payment/zipkin/",String.class);
+    }
 }

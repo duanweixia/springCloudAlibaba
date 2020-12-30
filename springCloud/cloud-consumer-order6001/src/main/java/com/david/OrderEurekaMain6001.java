@@ -1,9 +1,7 @@
 package com.david;
-import com.myrule.MyselfRule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.ribbon.RibbonClient;
 
 /**
  * @Package: com.david
@@ -17,9 +15,9 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 @EnableEurekaClient
 //自定义Ribbon负载均衡规则为随机,name表示去访问支付微服务，也就是服务提供者的名称
 //@RibbonClient(name = "PROVIDER-PAYMENT",configuration = MyselfRule.class)
-public class OrderEurekaMain {
+public class OrderEurekaMain6001 {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderEurekaMain.class,args);
+        SpringApplication.run(OrderEurekaMain6001.class,args);
     }
 }
