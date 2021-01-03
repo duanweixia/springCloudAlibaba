@@ -1,0 +1,45 @@
+server:
+  port: 8401
+
+spring:
+  application:
+    name: cloudalibaba-sentinal-service
+  cloud:
+    nacos:
+      discovery:
+        #Nacos服务注册中心地址（改成自己的服务器ip地址，本地用localhost‍）
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        #配置Sentin dashboard地址（改成自己的服务器ip地址，本地用localhost‍） http://localhost:8080/
+        dashboard: localhost:8080
+        # 默认8719端口，假如被占用了会自动从8719端口+1进行扫描，直到找到未被占用的 端口 8719
+        port: 8719
+        #以下配置表示当服务重启后，sentinel上设置的规则持久化，不用再从新配置规则,需要把服务名
+        #cloudalibaba-sentinal-service 作为Data Id 配置进nacos,选择json 格式，并以json格式配置
+        #相应的sentinel规则到nacos中，实现sentinel规则的持久化
+       # [
+       #   {
+       #     "resource": "/byurl",    表示资源名称
+       #     "limitApp": "default",   来源应用
+       #     "grade": 1,              阀值类型：0表示线程数，1表示QPS
+       #     "count": 1,              单机阀值
+       #     "strategy": 0,           流控模式：0表示直接，1表示关联，2表示链路
+       #     "controlBehavior": 0,    流控效果：0表示快速失败，1表示Warm Up,2表示排队等待
+       #     "clusterMode": false     是否集群
+       #    }
+       # ]
+      datasource:
+        ds1:
+          nacos:
+            server-addr: 127.0.0.1:8848
+            dataId: cloudalibaba-sentinel-service
+            groupId: DEFAULT_GROUP
+            data_type: json
+            rule-type: flow
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

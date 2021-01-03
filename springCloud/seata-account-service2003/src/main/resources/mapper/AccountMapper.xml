@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.david.dao.AccountDao">
+
+    <!--这里可以直接写实体对象，因为我们配置文件中集成mybatis时已经指定了实体类的所在的包名-->
+    <!--这里插入语句我们设置了useGeneratedKeys="true" keyProperty="id"二个属性，告知我们是否插入成功-->
+
+
+    <select id="decrease" parameterType="com.david.domain.Account">
+        update t_account set used =used + #{money} ,residue =residue - #{money}
+        where
+            user_id = #{userId}
+    </select>
+</mapper>

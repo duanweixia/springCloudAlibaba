@@ -151,3 +151,20 @@ curl -X PUT "$NACOS_SERVER:8848/nacos/v1/ns/operator/switches?entry=serverMode&v
 默认nacos使用嵌入式数据库实现数据的存储（当nacos重启后，再次打开页面，能回到我们刚才配置的信息）
 。所以，如果启动多个默认配置下的nacos节点，数据存储是存在一致性问题的。为了解决这个问题，nacos
 采用了 集中式存储的方式来支持集群化部署，目前只支持mysql.
+nacos持久化需要把自带的数据库切换成自己本地的mysql数据库
+
+实际生产中，应该是在 centos上装 2台nginx -> 3台nacos（集群）-> 2台mysql(主从备份)
+
+# Sentinel :分布式系统流量防卫兵
+sentinel 就相当于 hystrix 豪猪哥的阿里版。承受了阿里近10年双11流量大并发
+sentinel 直接运行jar包即可，hystrix 还需要自己起个服务. QPS:每秒请求数
+Sentinel 具有以下特征:
+阀值类型/单机阀值：
+  QP（每秒钟请求数）：当调用该API的QPS达到阀值的时候，进行限流
+  线程数：当调用该API的线程数达到阀值时，进行限流
+
+# feign / openFeign = Ribbon + RestTemplate
+
+
+
+

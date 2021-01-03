@@ -9,6 +9,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/cloud-config-center1001/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-consumer-gateway6007/pom.xml" />
       </set>
     </option>

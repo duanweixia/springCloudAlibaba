@@ -1,0 +1,51 @@
+server:
+  port: 2001
+spring:
+  application:
+    name: seata-order-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.6:8848
+  datasource:
+    # 当前数据源操作类型
+    type: com.alibaba.druid.pool.DruidDataSource
+    # mysql驱动类
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_order?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: dwx198629
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  type-aliases-package: com.david.domain
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: my_test_tx_group #my_test_tx_group 在seata /conf/file.conf 配置的事物组名称
+  enable-auto-data-source-proxy: true
+  service:
+    vgroupMapping:
+      my_test_tx_group: default
+    grouplist:
+      dev: 192.168.0.6:8091
+  config:
+    type: nacos
+    nacos:
+      namespace: ""
+      serverAddr: 192.168.0.6:8848
+      group: SEATA_GROUP
+      username: "nacos"
+      password: "nacos"
+      cluster: default
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 192.168.0.6:8848
+      group: SEATA_GROUP
+      namespace: ""
+      username: "nacos"
+      password: "nacos"
+      cluster: default
